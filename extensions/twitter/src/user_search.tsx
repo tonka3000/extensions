@@ -1,10 +1,12 @@
 import { List, showToast, ToastStyle } from "@raycast/api";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { UserV1 } from "twitter-api-v2";
+import { useV2API } from "./common";
 import { UserListItem } from "./components/user";
+import { UserSearchV2List } from "./components/v2/user_search";
 import { twitterClient, useRefresher } from "./twitterapi";
 
-export default function UserList() {
+export function UserList() {
   const [query, setQuery] = useState<string | undefined>();
   // eslint-disable-next-line
   const { data, error, isLoading, fetcher } = useRefresher<UserV1[] | undefined>(async (): Promise<
@@ -36,4 +38,11 @@ export default function UserList() {
       ))}
     </List>
   );
+}
+
+export default function UserSearchRoot(): ReactElement {
+  if (useV2API()) {
+    return <UserSearchV2List />;
+  }
+  return <UserList />;
 }

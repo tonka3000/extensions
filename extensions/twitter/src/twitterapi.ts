@@ -1,6 +1,6 @@
 import { getPreferenceValues } from "@raycast/api";
 import { useEffect, useState } from "react";
-import { AccountSettingsV1, TweetV1, TwitterApi } from "twitter-api-v2";
+import { AccountSettingsV1, TweetV1, TweetV2, TwitterApi } from "twitter-api-v2";
 import { getErrorMessage } from "./utils";
 
 function createClient(): TwitterApi {

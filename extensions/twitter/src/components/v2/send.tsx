@@ -1,30 +1,30 @@
 import { Action, ActionPanel, Form, popToRoot, showToast, Toast } from "@raycast/api";
-import { TweetV1 } from "twitter-api-v2";
-import { twitterClient } from "../twitterapi";
-import { getErrorMessage } from "../utils";
+import { Tweet } from "../../twitter";
+import { clientV2 } from "../../twitterapi_v2";
+import { getErrorMessage } from "../../utils";
 
 interface TweetFormValues {
   text: string;
 }
 
-async function submit(values: TweetFormValues, replyTweet?: TweetV1 | undefined) {
+async function submit(values: TweetFormValues, replyTweet?: Tweet | undefined) {
   try {
     const text = values.text;
-    if (text.length < 0) {
+    if (text.length <= 0) {
       throw Error("Please enter a text");
     }
     if (text.length > 280) {
       throw Error("Tweet text could not be longer than 280 characters");
     }
     if (replyTweet) {
-      await twitterClient.v1.reply(text, replyTweet.id_str);
+      await clientV2.replyTweet(text, replyTweet);
       await showToast({
         style: Toast.Style.Success,
         title: "Tweet created",
         message: "Reply Tweet creation successful",
       });
     } else {
-      await twitterClient.v1.tweet(text);
+      await clientV2.sendTweet(text);
       await showToast({ style: Toast.Style.Success, title: "Tweet created", message: "Tweet creation successful" });
     }
     popToRoot();
@@ -33,7 +33,7 @@ async function submit(values: TweetFormValues, replyTweet?: TweetV1 | undefined)
   }
 }
 
-export function TweetSendForm(props: { replyTweet?: TweetV1 | undefined }) {
+export function TweetSendV2Form(props: { replyTweet?: Tweet | undefined }) {
   const rt = props.replyTweet;
   const submitText = rt ? "Send Reply" : "Send Tweet";
   const fromTitle = rt ? "Reply" : "Tweet";
@@ -45,7 +45,7 @@ export function TweetSendForm(props: { replyTweet?: TweetV1 | undefined }) {
         </ActionPanel>
       }
     >
-      <Form.TextArea id="text" title={fromTitle} placeholder="What's happening?" />
+      <Form.TextArea id="text" title={fromTitle} placeholder="What's happening? V2" />
     </Form>
   );
 }
