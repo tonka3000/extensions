@@ -29,6 +29,27 @@ export class State {
   public last_changed = "";
 }
 
+export interface HACalendarEvent {
+  start: Start;
+  end: End;
+  summary: string;
+  description: string | null | undefined;
+  location: string | null | undefined;
+  uid: string | null | undefined;
+  recurrence_id: string | null | undefined;
+  rrule: string | null | undefined;
+}
+
+export interface Start {
+  date?: string;
+  dateTime?: string;
+}
+
+export interface End {
+  date?: string;
+  dateTime?: string;
+}
+
 export class HomeAssistant {
   public token: string;
   public url: string;
@@ -251,5 +272,15 @@ export class HomeAssistant {
 
   async getCameraProxyURL(entityID: string, localFilepath: string): Promise<void> {
     await this.downloadFile(`camera_proxy/${entityID}`, { localFilepath: localFilepath });
+  }
+
+  async getCalenderEvents(entityID: string): Promise<HACalendarEvent[]> {
+    const result = (await this.fetch(`calendars/${entityID}`, { start: "2022-12-01", end: "2023-01-31" })) as
+      | HACalendarEvent[]
+      | undefined;
+    if (result === undefined) {
+      throw new Error(`Could not fetch calendar events of ${entityID} `);
+    }
+    return result;
   }
 }

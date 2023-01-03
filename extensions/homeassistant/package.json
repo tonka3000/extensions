@@ -188,6 +188,13 @@
       "mode": "view"
     },
     {
+      "name": "calendars",
+      "title": "Calendars",
+      "subtitle": "Home Assistant",
+      "description": "Calendar Schedule",
+      "mode": "view"
+    },
+    {
       "name": "notificationmenu",
       "title": "Notifications Menu",
       "description": "Display Persistent Notifications in the MenuBar",
@@ -281,6 +288,7 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.42.0",
+    "@raycast/utils": "^1.4.14",
     "home-assistant-js-websocket": "^5.11.1",
     "javascript-time-ago": "^2.5.9",
     "lodash-es": "^4.17.21",

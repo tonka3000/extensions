@@ -313,6 +313,8 @@ function getIcon(state: State): Image.ImageLike | undefined {
     return { source: source, tintColor: tintColor };
   } else if (e.startsWith("zone")) {
     return { source: "home.svg", tintColor: PrimaryIconColor };
+  } else if (e.startsWith("calendar")) {
+    return { source: "calendar.svg", tintColor: state.state === "on" ? Color.Yellow : PrimaryIconColor };
   } else {
     const di = getDeviceClassIcon(state);
     return di ? di : { source: "entity.png", tintColor: PrimaryIconColor };
