@@ -116,7 +116,7 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.50.0",
-    "@raycast/utils": "^1.4.0",
+    "@raycast/utils": "1.4.0",
     "lodash.get": "^4.4.2",
     "prettier": "^2.8.1",
     "run-applescript": "^6.1.0",
