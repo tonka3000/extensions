@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { getErrorMessage } from "./utils";
 import { clearSearchBar } from "@raycast/api";
 import { getTranslation } from "./lib/translation";
+import { recordMicrophone } from "./lib/sox";
+import { voicePipeline } from "./lib/voice";
 
 interface PlainSpeech {
   speech: string;
@@ -135,6 +137,10 @@ function PipelinesDropdownList(props: {
   );
 }
 
+function TalkAction(props: { pipeline?: HAAssistPipeline }) {
+  return <Action title="Talk" onAction={() => voicePipeline(props.pipeline?.id)} />;
+}
+
 export default function AssistCommand(): JSX.Element {
   const [searchText, setSearchText] = useState<string>("");
   const { pipelines, isLoading: isLoadingPipeline, error } = useAssistPipelines();
@@ -221,6 +227,7 @@ export default function AssistCommand(): JSX.Element {
                 <ActionPanel>
                   <ActionPanel.Section>
                     <Action onAction={() => process()} title="Send" icon={Icon.Terminal} />
+                    <TalkAction pipeline={selectedPipeline} />
                     <Action.CopyToClipboard title="Copy Text to Clipboard" content={c.text} />
                   </ActionPanel.Section>
                   <ActionPanel.Section>
