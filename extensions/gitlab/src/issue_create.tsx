@@ -4,6 +4,7 @@ import { gitlab } from "./common";
 import { useState, useEffect } from "react";
 import { getErrorMessage, projectIcon, showErrorToast, toFormValues } from "./utils";
 import { useCache } from "./cache";
+import { useCachedState } from "@raycast/utils";
 
 interface IssueFormValues {
   project_id: number;
@@ -34,7 +35,9 @@ async function submit(values: IssueFormValues) {
 }
 
 function IssueForm() {
-  const [selectedProject, setSelectedProject] = useState<string>();
+  const [selectedProject, setSelectedProject] = useCachedState<string | undefined>("last-selected-project", undefined, {
+    cacheNamespace: "create-issue",
+  });
   const {
     data: projects,
     error: errorProjects,

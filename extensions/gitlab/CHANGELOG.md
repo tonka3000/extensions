@@ -1,5 +1,9 @@
 # GitLab Changelog
 
+## [Optimize] - 2023-08-04
+
+- Cache last selected project in `Create Issue`
+
 ## [Optimize Recent Activities] - 2023-07-02
 
 - Add unsupported activity
