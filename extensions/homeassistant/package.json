@@ -385,6 +385,12 @@
           "placeholder": "cover.mycover1,cover.bath*"
         }
       ]
+    },
+    {
+      "name": "mictest",
+      "title": "Mic Test",
+      "description": "Mic Test via Swift",
+      "mode": "view"
     }
   ],
   "preferences": [
