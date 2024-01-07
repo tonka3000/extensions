@@ -3,12 +3,13 @@ import { State } from "@lib/haapi";
 import { Icon, List, Toast, showToast } from "@raycast/api";
 import { useHATodos } from "./hooks";
 import { TodoItem } from "./utils";
+import { TodoListItemActionPanel } from "./actions";
 
 export function TodoEntityList() {
   return <StatesList domain="todo" />;
 }
 
-function TodoListItem(props: { todo: TodoItem }) {
+function TodoListItem(props: { state: State; todo: TodoItem }) {
   const t = props.todo;
   if (!t.uid || !t.status) {
     return null;
@@ -20,6 +21,7 @@ function TodoListItem(props: { todo: TodoItem }) {
       title={t.summary ?? "?"}
       icon={iconSource}
       accessories={[{ date: due ? due : undefined, tooltip: due ? due.toLocaleString() : undefined }]}
+      actions={<TodoListItemActionPanel state={props.state} todo={t} />}
     />
   );
 }
@@ -33,8 +35,12 @@ export function TodoList(props: { state: State }) {
   const completed = todos?.items?.filter((t) => t.status === "completed");
   return (
     <List isLoading={isLoading}>
-      <List.Section title="Todo">{uncompleted?.map((t) => <TodoListItem key={t.uid} todo={t} />)}</List.Section>
-      <List.Section title="Completed">{completed?.map((t) => <TodoListItem key={t.uid} todo={t} />)}</List.Section>
+      <List.Section title="Todo">
+        {uncompleted?.map((t) => <TodoListItem key={t.uid} state={props.state} todo={t} />)}
+      </List.Section>
+      <List.Section title="Completed">
+        {completed?.map((t) => <TodoListItem key={t.uid} state={props.state} todo={t} />)}
+      </List.Section>
     </List>
   );
 }
