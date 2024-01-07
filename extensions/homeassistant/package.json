@@ -385,6 +385,12 @@
           "placeholder": "cover.mycover1,cover.bath*"
         }
       ]
+    },
+    {
+      "name": "todos",
+      "title": "Todos",
+      "description": "Show Todo Lists",
+      "mode": "view"
     }
   ],
   "preferences": [

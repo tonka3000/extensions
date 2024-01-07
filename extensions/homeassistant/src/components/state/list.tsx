@@ -31,6 +31,7 @@ import { ClimateActionPanel } from "@components/climate/actions";
 import { CoverActionPanel } from "@components/cover/actions";
 import { useStateSearch } from "./hooks";
 import { getIcon, getStateValue } from "./utils";
+import { TodoListActionPanel } from "@components/todo/actions";
 
 export function StatesList(props: { domain: string; deviceClass?: string | undefined }): JSX.Element {
   const [searchText, setSearchText] = useState<string>();
@@ -194,6 +195,9 @@ export function StateActionPanel(props: { state: State }): JSX.Element {
     }
     case "weather": {
       return <WeatherActionPanel state={state} />;
+    }
+    case "todo": {
+      return <TodoListActionPanel state={state} />;
     }
     default: {
       return (
