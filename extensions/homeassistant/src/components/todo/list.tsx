@@ -35,10 +35,10 @@ export function TodoList(props: { state: State }) {
   const completed = todos?.items?.filter((t) => t.status === "completed");
   return (
     <List isLoading={isLoading}>
-      <List.Section title="Todo">
+      <List.Section title="Todo" subtitle={`${uncompleted?.length}`}>
         {uncompleted?.map((t) => <TodoListItem key={t.uid} state={props.state} todo={t} />)}
       </List.Section>
-      <List.Section title="Completed">
+      <List.Section title="Completed" subtitle={`${completed?.length}`}>
         {completed?.map((t) => <TodoListItem key={t.uid} state={props.state} todo={t} />)}
       </List.Section>
     </List>
