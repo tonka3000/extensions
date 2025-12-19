@@ -21,7 +21,7 @@ import { GitLabOpenInBrowserAction } from "./actions";
 import { getCIJobStatusEmoji } from "./jobs";
 import { useCache } from "../cache";
 import { userIcon } from "./users";
-import { useCachedPromise, useCachedState } from "@raycast/utils";
+import { getAvatarIcon, useCachedPromise, useCachedState } from "@raycast/utils";
 import { CacheActionPanelSection } from "./cache_actions";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -410,7 +410,11 @@ export function MRListItem(props: {
   };
 
   const icon = getIcon();
-  const accessoryIcon: Image.ImageLike | undefined = { source: mr.author?.avatar_url || "", mask: Image.Mask.Circle };
+  const accessoryIcon: Image.ImageLike | undefined = {
+    source: mr.author?.avatar_url || getAvatarIcon(mr.author?.name || ""),
+    fallback: getAvatarIcon(mr.author?.name || ""),
+    mask: Image.Mask.Circle,
+  };
 
   let cistatusEmoji: string | undefined;
   if (props.showCIStatus === undefined || props.showCIStatus === true) {
