@@ -19,6 +19,7 @@ import { IssueItemActions } from "./issue_actions";
 import { GitLabOpenInBrowserAction } from "./actions";
 import { userIcon } from "./users";
 import { CacheActionPanelSection } from "./cache_actions";
+import { getAvatarIcon } from "@raycast/utils";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -228,7 +229,11 @@ export function IssueListItem(props: { issue: Issue; refreshData: () => void }) 
         },
         { date: new Date(issue.updated_at), tooltip: `Updated: ${toLongDateString(issue.updated_at)}` },
         {
-          icon: { source: issue.author?.avatar_url || "", mask: Image.Mask.Circle },
+          icon: {
+            source: issue.author?.avatar_url || getAvatarIcon(issue.author?.name || ""),
+            fallback: getAvatarIcon(issue.author?.name || ""),
+            mask: Image.Mask.Circle,
+          },
           tooltip: issue.author ? `Author: ${issue.author?.name}` : undefined,
         },
       ]}
