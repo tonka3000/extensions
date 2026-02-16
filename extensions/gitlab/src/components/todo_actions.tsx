@@ -1,4 +1,4 @@
-import { Action, ActionPanel, Color, Icon, showToast, Toast } from "@raycast/api";
+import { Action, Color, Icon, Keyboard, showToast, Toast } from "@raycast/api";
 import { gitlab } from "../common";
 import { jsonDataToIssue, jsonDataToMergeRequest as jsonDataToMergeRequest, Todo } from "../gitlabapi";
 import { GitLabIcons } from "../icons";
@@ -34,7 +34,7 @@ export function CloseTodoAction(props: { todo: Todo; finished?: () => void }) {
     }
   }
   return (
-    <ActionPanel.Item
+    <Action
       title="Mark as Done"
       icon={{ source: Icon.XMarkCircle, tintColor: Color.Red }}
       shortcut={{ modifiers: ["cmd"], key: "d" }}
@@ -56,10 +56,21 @@ export function CloseAllTodoAction(props: { finished?: () => void }) {
     }
   }
   return (
-    <ActionPanel.Item
+    <Action
       title="Mark All as Done"
       icon={{ source: Icon.ExclamationMark, tintColor: Color.Red }}
       onAction={handleAction}
+    />
+  );
+}
+
+export function RefreshTodosAction({ refresh }: { refresh: () => void }) {
+  return (
+    <Action
+      title="Refresh Todos"
+      icon={{ source: Icon.ArrowClockwise, tintColor: Color.PrimaryText }}
+      shortcut={Keyboard.Shortcut.Common.Refresh}
+      onAction={refresh}
     />
   );
 }

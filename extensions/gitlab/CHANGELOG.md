@@ -1,5 +1,9 @@
 # GitLab Changelog
 
+## [Optimize] - {PR_MERGE_DATE}
+
+- Add Refresh action to Todos command
+
 ## [Optimize Windows Experience] - 2025-12-05
 
 - Better milestones view

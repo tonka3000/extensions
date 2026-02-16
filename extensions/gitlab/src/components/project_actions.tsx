@@ -165,7 +165,7 @@ function CloneUrlList(props: { project: Project }) {
         icon={{ source: Icon.Link, tintColor: Color.PrimaryText }}
         actions={
           <ActionPanel>
-            <Action.CopyToClipboard title="Ssh" content={props.project.ssh_url_to_repo || ""} />
+            <Action.CopyToClipboard title="SSH" content={props.project.ssh_url_to_repo || ""} />
           </ActionPanel>
         }
       />

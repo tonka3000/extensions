@@ -1,7 +1,7 @@
 import { ActionPanel, Color, Image, launchCommand, LaunchType, List } from "@raycast/api";
 import { Project, Todo, User } from "../gitlabapi";
 import { GitLabIcons } from "../icons";
-import { CloseAllTodoAction, CloseTodoAction, ShowTodoDetailsAction } from "./todo_actions";
+import { CloseAllTodoAction, CloseTodoAction, RefreshTodosAction, ShowTodoDetailsAction } from "./todo_actions";
 import { GitLabOpenInBrowserAction } from "./actions";
 import { useTodos } from "./todo/utils";
 import { MyProjectsDropdown } from "./project";
@@ -144,6 +144,7 @@ export function TodoListItem(props: { todo: Todo; refreshData: () => void }) {
           <ActionPanel.Section>
             <CloseTodoAction todo={todo} finished={props.refreshData} />
             <CloseAllTodoAction finished={props.refreshData} />
+            <RefreshTodosAction refresh={props.refreshData} />
           </ActionPanel.Section>
           <CacheActionPanelSection />
         </ActionPanel>
