@@ -16,7 +16,7 @@ import {
   toLongDateString,
 } from "../utils";
 import { gql } from "@apollo/client";
-import { MRItemActions } from "./mr_actions";
+import { MRItemActions, RefreshMRsAction } from "./mr_actions";
 import { GitLabOpenInBrowserAction } from "./actions";
 import { getCIJobStatusEmoji } from "./jobs";
 import { useCache } from "../cache";
@@ -480,6 +480,7 @@ export function MRListItem(props: {
           </ActionPanel.Section>
           <ActionPanel.Section>
             <MRItemActions mr={mr} onDataChange={props.refreshData} />
+            <RefreshMRsAction refresh={props.refreshData} />
           </ActionPanel.Section>
           <ActionPanel.Section>{props.action ?? props.action}</ActionPanel.Section>
           <CacheActionPanelSection />

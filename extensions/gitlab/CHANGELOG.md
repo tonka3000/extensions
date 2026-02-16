@@ -3,6 +3,7 @@
 ## [Optimize] - {PR_MERGE_DATE}
 
 - Add Refresh action to Todos command
+- Add Refresh action to Merge Request Reviews command
 
 ## [Optimize Windows Experience] - 2025-12-05
 

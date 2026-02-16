@@ -161,3 +161,14 @@ export function ShowMRCommitsAction(props: { mr: MergeRequest }) {
     />
   );
 }
+
+export function RefreshMRsAction({ refresh }: { refresh: () => void }) {
+  return (
+    <Action
+      title="Refresh Merge Requests"
+      icon={{ source: Icon.ArrowClockwise, tintColor: Color.PrimaryText }}
+      shortcut={Keyboard.Shortcut.Common.Refresh}
+      onAction={refresh}
+    />
+  );
+}
